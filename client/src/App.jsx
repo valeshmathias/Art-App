@@ -1,5 +1,4 @@
 import { EthProvider } from "./contexts/EthContext";
-import Demo from "./components/Demo";
 import Auction from "./components/Auction";
 import "./App.css";
 
@@ -8,8 +7,6 @@ function App() {
     <EthProvider>
       <div id="App" >
         <div className="container">
-          {/* <Demo />
-          <hr /> */}
           <Auction />
         </div>
       </div>

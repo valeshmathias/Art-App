@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useEth from "../../contexts/EthContext/useEth";
 
-function AuctionButtons({ setValue }) {
+function AuctionButtons({ setValue, setMaxBid, setMaxBidder }) {
   const { state: { contract, accounts } } = useEth();
   const [inputValue, setInputValue] = useState("");
 
@@ -16,46 +16,26 @@ function AuctionButtons({ setValue }) {
       alert("Please enter a value to write.");
       return;
     }
-    const value = await contract.methods.setNewBid().call({ from: accounts[0] , value: ""});
+    const value = await contract.methods.setNewBid().send({ from: accounts[0], value: (inputValue*1000000000000000000)});
     const maxBid = await contract.methods.getHighestBid().call({ from: accounts[0] });
     const maxBidder = await contract.methods.getHighestBidder().call({ from: accounts[0] });
     setValue(value);
-    setValue(maxBid);
-    setValue(maxBidder);
+    setMaxBid(maxBid);
+    setMaxBidder(maxBidder);
   };
 
   const withdraw = async () => {
-    const value = await contract.methods.withdrawBid().call({ from: accounts[0] });
+    const value = await contract.methods.withdrawBid(accounts[0]).send({ from: accounts[0] });
     setValue(value);
-  };
-
-  const write = async e => {
-    if (e.target.tagName === "INPUT") {
-      return;
-    }
-    if (inputValue === "") {
-      alert("Please enter a value to write.");
-      return;
-    }
-    const newValue = parseInt(inputValue);
-    await contract.methods.write(newValue).send({ from: accounts[0] });
   };
 
   return (
     <div className="btns">
 
-      <input type="text" placeholder="uint" value={inputValue} onChange={handleInputChange} />
+      <input id="amount" type="text" placeholder="ETH" value={inputValue} onChange={handleInputChange}/>
+      <br></br><br></br>
       <button onClick={newBid}>Bid on Item</button>
-      <p>{}</p>
-
-      <div onClick={withdraw} className="input-btn">
-        write(<input
-          type="text"
-          placeholder="uint"
-          value={inputValue}
-          onChange={handleInputChange}
-        />)
-      </div>
+      <button onClick={withdraw} className="input-btn">Withdraw</button>
 
     </div>
   );

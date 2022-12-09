@@ -141,3 +141,65 @@ hr {
   display: inline-block;
   margin: 2rem 1rem 0 0;
 }
+
+img {
+  width: 100%;
+  height: 100%;
+  border: 15px solid brown;
+}
+
+#amount {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+#img-cont {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+button {
+  transition-duration: 0.4s;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 50%;
+}
+
+button:hover {
+  background-color: blue; /* Green */
+  color: white;
+}
+
+#max-bid {
+  color: green;
+  font-weight: bold;
+}
+
+#max-bidder {
+  color: brown;
+  font-weight: bold;
+}
+
+#side-header {
+  color: brown;
+  font-weight: bold;
+}
+
+table {
+  border: 5px solid brown;
+  padding: 15px;
+}
+
+td {
+  height: 40px;
+  width: 50px;
+  padding: 15px;
+  border-bottom: 2px solid #ddd;
+}

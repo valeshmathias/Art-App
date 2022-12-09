@@ -10,11 +10,12 @@ contract Bidding {
 
     function setNewBid() public payable {
         uint amount = bidData[msg.sender] + msg.value;
-        require(block.timestamp <= endTime, "The auction has ended.");
+        // require(block.timestamp <= endTime, "The auction has ended.");
         require(msg.value > 0, "You need to bid some amount.");
 
         require(msg.value > highestBid, "Higher bid is present.");
         bidData[msg.sender] = amount;
+        highestBid = amount;
         highestBidder = msg.sender;
     }
 

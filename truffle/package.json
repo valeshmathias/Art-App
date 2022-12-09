@@ -10,7 +10,7 @@
   "scripts": {
     "test": "truffle test",
     "compile": "truffle compile",
-    "deploy": "truffle deploy"
+    "deploy": "truffle migrate"
   },
   "author": "",
   "license": "MIT"
