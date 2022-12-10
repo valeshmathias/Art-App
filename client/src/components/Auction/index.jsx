@@ -8,6 +8,7 @@ function Auction() {
   const [value, setValue] = useState("?");
   const [maxBid, setMaxBid] = useState("?");
   const [maxBidder, setMaxBidder] = useState("?");
+  const [balance, setBalance] = useState("?");
 
   const auction =
     <>
@@ -15,10 +16,11 @@ function Auction() {
         <AuctionItem />
       </div>
       <div className="auction-btn-container">
-        <AuctionButtons setValue={setValue} setMaxBid={setMaxBid} setMaxBidder={setMaxBidder} />
+        <AuctionButtons setValue={setValue} setMaxBid={setMaxBid} setMaxBidder={setMaxBidder} setBalance={setBalance} />
       </div>
       <br></br>
       <div>
+        <p id="max-bid">Balance : {balance}</p>
         <p id="max-bid">Highest Bid : {maxBid/1000000000000000000} ETH</p>
         <p id="max-bidder">Highest Bidder : {maxBidder}</p>
         <br></br>

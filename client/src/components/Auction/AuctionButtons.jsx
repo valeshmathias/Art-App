@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useEth from "../../contexts/EthContext/useEth";
 
-function AuctionButtons({ setValue, setMaxBid, setMaxBidder }) {
+function AuctionButtons({ setValue, setMaxBid, setMaxBidder, setBalance }) {
   const { state: { contract, accounts } } = useEth();
   const [inputValue, setInputValue] = useState("");
 
@@ -29,6 +29,21 @@ function AuctionButtons({ setValue, setMaxBid, setMaxBidder }) {
     setValue(value);
   };
 
+  const balance = async () => {
+    const balance = await contract.methods.getBalance(accounts[0]).call({ from: accounts[0] });
+    setBalance(balance/1000000000000000000);
+  };
+
+  const highbid = async () => {
+    const maxBid = await contract.methods.getHighestBid().call({ from: accounts[0] });
+    setMaxBid(maxBid);
+  };
+
+  const highbidder = async () => {
+    const maxBidder = await contract.methods.getHighestBidder().call({ from: accounts[0] });
+    setMaxBidder(maxBidder);
+  };
+
   return (
     <div className="btns">
 
@@ -36,6 +51,9 @@ function AuctionButtons({ setValue, setMaxBid, setMaxBidder }) {
       <br></br><br></br>
       <button onClick={newBid}>Bid on Item</button>
       <button onClick={withdraw} className="input-btn">Withdraw</button>
+      <button onClick={balance}>My Balance</button>
+      <button onClick={highbid}>Highest Bidder</button>
+      <button onClick={highbidder}>Highest Bid</button>
 
     </div>
   );
